@@ -1,0 +1,5 @@
+Gemfile.lock
+tmp
+.sass-cache
+public/bootstrap
+public/stylesheets
