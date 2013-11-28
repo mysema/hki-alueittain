@@ -2,7 +2,7 @@ What is this?
 =============
 
 This is a pre-packaged description of the technology used to build the 
-Helsinki alueittain map prototype. See [prototype.md] for an overview 
+Helsinki alueittain map prototype. See [prototype.md](https://github.com/mysema/hki-alueittain/blob/master/map-prototype/prototype.md) for an overview 
 of the actual prototype. 
 
 The Helsinki alueittain map prototype is designed to be viewed with Serve.
