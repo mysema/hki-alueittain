@@ -1,8 +1,11 @@
 What is this?
 =============
 
-This is a simple HTML prototype written in ERB that is designed to be
-viewed with Serve.
+This is a pre-packaged description of the technology used to build the 
+Helsinki alueittain map prototype. See [prototype.md] for an overview 
+of the actual prototype. 
+
+The Helsinki alueittain map prototype is designed to be viewed with Serve.
 
 What is Serve? Serve is an open-source rapid prototyping framework for Web
 applications. It makes it easy to prototype functionality without writing a
