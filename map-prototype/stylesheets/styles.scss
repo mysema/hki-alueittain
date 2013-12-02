@@ -26,7 +26,7 @@
   height: 600px;
   z-index:1000;
 
-  @include box-shadow(rgba(black, 0.4) 7px 0 10px -6px, rgba(black, 0.4) -7px 0 10px -6px inset);
+  @include box-shadow(rgba(#333, 0.35) 7px 0 8px -7px, rgba(#333, 0.35) -7px 0 8px -7px inset);
 }
 
 #swipe div {
