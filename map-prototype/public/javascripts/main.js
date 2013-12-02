@@ -103,7 +103,7 @@ document.onmouseup = function() {
 document.onmousemove = function(e) {
   if (dragging) {
     // TODO: The divide "jumps" a bit if you grab the handle off-center
-    moveSwipe(map, swipe, e.x);
+    moveSwipe(map, swipe, e.x || e.pageX);
     setDivide(map, 
               document.getElementById('clipLeft'), 
               document.getElementById('clipRight'),
