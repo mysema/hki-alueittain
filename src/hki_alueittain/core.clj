@@ -11,9 +11,9 @@
     (redirect "index.html"))
   
   (GET "/excel" []
-    (let [model (services/get-data "attachments/prototype/tblDataTiedot.xlsx")
-          view (views/as-table model)]
-      view))    
+    (-> "attachments/prototype/tblDataTiedot.xlsx"
+         services/get-data
+         views/excel-page))    
   
   (route/resources "/")
   
