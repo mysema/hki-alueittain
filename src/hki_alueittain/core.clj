@@ -12,7 +12,7 @@
   
   (GET "/excel" []
     (-> "attachments/prototype/tblDataTiedot.xlsx"
-         services/get-data
+         services/get-excel-data
          views/excel-page))    
   
   (route/resources "/")

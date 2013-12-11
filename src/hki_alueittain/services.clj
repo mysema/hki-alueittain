@@ -1,7 +1,15 @@
 (ns hki-alueittain.services
-  (:require [dk.ative.docjure.spreadsheet :refer :all]))
+  (:require  [clojure.java.io :as jio]
+             [clojure.string :refer (split split-lines)]
+             [dk.ative.docjure.spreadsheet :refer :all]))
 
-(defn get-data
+(def areas
+  (->> (slurp (jio/resource "helsinki-areas.csv") :encoding "UTF-8")
+       split-lines
+       (map #(split % #","))
+       (into {})))
+  
+(defn get-excel-data
   [id]
   (let [[x & xs] (-> (load-workbook id)
                      (.getSheetAt 0)
