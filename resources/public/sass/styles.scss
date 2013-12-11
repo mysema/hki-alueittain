@@ -1,0 +1,15 @@
+@import "variables";
+@import "bootstrap";
+
+@import "compass/layout";
+
+@import "partials/base";
+
+.navbar-default {
+  @include bs-custom-navbar($navbarHeight, $navbarBackground, $navbarForeground, $navbarHighlight);
+}
+
+.files-form input[type="text"] {
+  cursor: not-allowed;
+}
+
