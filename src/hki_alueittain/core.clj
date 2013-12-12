@@ -13,9 +13,8 @@
   (GET "/admin" []
     (views/admin-page))
 
-  (GET "/excel" []
-    (-> "attachments/prototype/tblDataTiedot.xlsx"
-         services/get-excel-data
+  (GET "/data/:id" [id]
+    (-> (services/get-excel-data id)
          views/excel-page))    
   
   (route/resources "/")
