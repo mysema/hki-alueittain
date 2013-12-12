@@ -76,4 +76,20 @@
   []
   (layout :title "Admin page"
           :active :admin  
-          :content "Foobar"))
+          :content [:form.files-form.form-horizontal
+                    {:role "form"}
+                    [:div.form-group
+                     [:label.col-sm-2.control-label
+                      {:for "inputConfig"}
+                      "Lataa konfigurointi:"]
+                     [:div.col-sm-2 [:input#inputConfig.form-control {:type "text"}]]
+                     [:button.btn.btn-default "Selaa"]]
+                    [:div.form-group
+                     [:label.col-sm-2.control-label
+                      {:for "inputExcel"}
+                      "Lataa Exceltiedosto:"]
+                     [:div.col-sm-2 [:input#inputExcel.form-control {:type "text"}]]
+                     [:button.btn.btn-default "Selaa"]]
+                    [:div.form-group
+                     [:div.col-sm-offset-2.col-sm-10
+                      [:button.btn.btn-primary.btn-lg {:type "submit"} "Julkaise"]]]]))
