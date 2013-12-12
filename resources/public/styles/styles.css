@@ -6440,3 +6440,7 @@ body {
   -ms-user-select: none;
   user-select: none;
 }
+
+#fileupload {
+  display: none;
+}

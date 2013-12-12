@@ -1,5 +1,6 @@
 (ns hki-alueittain.views
-  (:require [hiccup.core :refer (html)]))
+  (:require [hiccup.core :refer (html)]
+            [hiccup.page :refer (include-js)]))
 
 (defn- tags
   [tag]
@@ -50,6 +51,12 @@
                  {:name "description" :content ""}
                  {:name "viewport" :content "width=device-width"})
       (link-tags {:rel "stylesheet" :href "/styles/styles.css"})
+      (include-js "scripts/vendor/jquery.js")
+      (include-js "scripts/vendor/jquery.ui.widget.js")
+      (include-js "scripts/vendor/jquery.iframe-transport.js")
+      (include-js "scripts/vendor/jquery.fileupload.js")
+      (include-js "scripts/upload.js")
+
      [:body 
       (navbar (nav-with-active nav active))
       [:section 
@@ -84,18 +91,19 @@
           :active :admin  
           :content [:form.files-form.form-horizontal
                     {:role "form"}
+                    [:input#fileupload {:type "file" :name "file" :data-url "/admin"}]
                     [:div.form-group
                      [:label.col-sm-2.control-label
                       {:for "inputConfig"}
                       "Lataa konfigurointi:"]
                      [:div.col-sm-2 [:input#inputConfig.form-control {:type "text"}]]
-                     [:button.btn.btn-default "Selaa"]]
+                     [:button#config.btn.btn-default "Selaa"]]
                     [:div.form-group
                      [:label.col-sm-2.control-label
                       {:for "inputExcel"}
                       "Lataa Exceltiedosto:"]
                      [:div.col-sm-2 [:input#inputExcel.form-control {:type "text"}]]
-                     [:button.btn.btn-default "Selaa"]]
+                     [:button#excel.btn.btn-default "Selaa"]]
                     [:div.form-group
                      [:div.col-sm-offset-2.col-sm-10
-                      [:button.btn.btn-primary.btn-lg {:type "submit"} "Julkaise"]]]]))
+                      [:button#publish.btn.btn-primary.btn-lg {:type "submit"} "Julkaise"]]]]))
