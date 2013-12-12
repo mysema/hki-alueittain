@@ -16,3 +16,5 @@ pom.xml.asc
 .settings
 .DS_Store
 .sass-cache
+.nrepl-port
+.~lock*
