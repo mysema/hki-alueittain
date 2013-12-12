@@ -1,0 +1,20 @@
+Väestö ja perheet:
+  Äidinkieli ja kansalaisuus:
+    columns:
+      - name: persons
+        label: Henkilöä
+      - name: percentage
+        label: "%"
+    rows:
+      - label: Suomenkieliset
+        source-columns: [finnish, finnish-rel]
+      - label: Ruotsinkieliset
+        source-columns: [swedish, swedish-rel]
+      - label: Muunkieliset
+        source-columns: [other-lang, other-lang-rel]
+      - label: Ulkomaalaiset
+        source-columns: [foreigners, foreigners-rel]
+      - label: Ulkomaalaistaustaiset
+        source-columns: [foreign-background, foreign-background-rel]
+    show_city_average: true
+    city_average_column: percentage
