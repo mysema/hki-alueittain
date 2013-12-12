@@ -72,9 +72,15 @@
   (layout :title "Excel example"
           :content (as-table content)))
 
+(defn areas-page
+  []
+  (layout :title "Alueet"
+          :active :areas
+          :content "Insert wild statistics here"))
+
 (defn admin-page
   []
-  (layout :title "Admin page"
+  (layout :title "Ylläpito"
           :active :admin  
           :content [:form.files-form.form-horizontal
                     {:role "form"}

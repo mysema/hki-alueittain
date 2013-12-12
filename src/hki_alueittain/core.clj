@@ -8,7 +8,7 @@
 
 (defroutes routes
   (GET "/" []
-    (redirect "index.html"))
+    (views/areas-page))
   
   (GET "/admin" []
     (views/admin-page))
