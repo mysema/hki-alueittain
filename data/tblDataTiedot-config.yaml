@@ -72,9 +72,9 @@ columns:
   public-buildings: Julkiset rakennukset
   industrial-buildings: Teollisuusrakennukset
   other-buildings: Muut rakennukset
-  kindergardens: Päiväkoteja
-  children-in-kindergardens: Lapsia päiväkotihoidossa yht
-  0-6y-in-kindergarden: 0-6v kokopäivähoidossa/100 lasta
+  kindergartens: Päiväkoteja
+  children-in-kindergartens: Lapsia päiväkotihoidossa yht
+  0-6y-in-kindergarten: 0-6v kokopäivähoidossa/100 lasta
   0-6y-in-kindergarden-fullday: 0-6v (kokopäivä)perhepäivähoidossa
   0-6-in-familycare-fullday: 0-6v (kokopäivä)perhepäivähoidossa/100 lasta
   daycare-support-families: Kotihoidon tukea saavia perheitä
@@ -107,14 +107,14 @@ columns:
   churches: Kirkko
   postal-offices: Posti
   kela-offices: KELA:n toimisto
-  pharmaices: Apteekki
+  pharmacies: Apteekki
   alkos: Alko
   grocery-stores: Päivittäistavarakaupat
   other-stores: Muut vähittäiskaupat
   restaurants-and-cafes: Ravintolat ja kahvilat
   parks-area: Puistoa, ha
-  forrest-area: Metsää, ha
-  swimming-beaches: Uimaranta, kpl
+  forest-area: Metsää, ha
+  beaches: Uimaranta, kpl
   walking-accidents-avg-per-year: Jalankulkuonnettomuuksia keskim/vuosi
   unemployment: Työttömyysaste
   longterm-unemployment: Pitäaikaistyöttömyys
