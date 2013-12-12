@@ -1,7 +1,8 @@
 (ns hki-alueittain.services
   (:require  [clojure.java.io :as jio]
              [clojure.string :refer (split split-lines)]
-             [dk.ative.docjure.spreadsheet :refer :all]))
+             [dk.ative.docjure.spreadsheet :refer :all]
+             [clj-yaml.core :as yaml]))
 
 (def areas
   (->> (slurp (jio/resource "helsinki-areas.csv") :encoding "UTF-8")
@@ -9,9 +10,14 @@
        (map #(split % #","))
        (into {})))
   
+(defn- get-excel-mappings
+  [path]
+  (-> (slurp path :encoding "UTF-8")
+      yaml/parse-string))
+
 (defn get-excel-data
-  [id]
-  (let [[x & xs] (-> (load-workbook id)
+  [path]
+  (let [[x & xs] (-> (load-workbook path)
                      (.getSheetAt 0)
                      row-seq)
         headers (map read-cell x)

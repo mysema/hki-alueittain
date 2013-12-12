@@ -9,7 +9,8 @@
                  [org.slf4j/slf4j-api "1.6.1"]
                  [org.slf4j/slf4j-log4j12 "1.6.1"]
                  [hiccup "1.0.1"]
-                 [dk.ative/docjure "1.6.0"]  ]
+                 [dk.ative/docjure "1.6.0"]
+                 [clj-yaml "0.4.0"]]
   :plugins [[lein-ring "0.8.6"]]
   :ring {:handler hki-alueittain.core/app}
   :profiles {:dev {:dependencies [[midje "1.5.1"]
