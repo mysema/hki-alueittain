@@ -10,6 +10,9 @@
   (GET "/" []
     (redirect "index.html"))
   
+  (GET "/admin" []
+    (views/admin-page))
+
   (GET "/excel" []
     (-> "attachments/prototype/tblDataTiedot.xlsx"
          services/get-excel-data
@@ -25,4 +28,6 @@
   (use 'ring.server.standalone)
   (def handler (handler/site #'routes))
   (defonce server (serve #'handler {:auto-reload? false
-                                    :open-browser? false})))
+                                    :open-browser? false}))
+  
+  )
