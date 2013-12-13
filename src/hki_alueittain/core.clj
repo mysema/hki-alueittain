@@ -15,7 +15,8 @@
     (views/admin-page))
 
   (mp/wrap-multipart-params
-    (POST "/admin" {params :params} (services/upload-file (:file params))))
+    (POST "/admin" [file] 
+      (services/upload-file file)))
 
   (GET "/data/:id" [id]
     (-> (services/get-excel-data id)
