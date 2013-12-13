@@ -31,4 +31,23 @@ $(document).ready(function() {
     e.preventDefault();
   });
 
+  $('#publish').click(function(e) {
+    var mappingFilename = $('#mapping-input').val(),
+      configFilename = $('#config-input').val(),
+      excelFilename = $('#excel-input').val();
+      
+    e.preventDefault();
+
+    $.post('/publish', 
+           {
+             mapping: mappingFilename,
+             config: configFilename,
+             excel: excelFilename
+           },
+           function(data) {
+             window.location = "/";
+           });
+
+  });
+
 });

@@ -17,6 +17,10 @@
   [file]
   (jio/copy (:tempfile file) (jio/file (str data-path "/" (:filename file))))
   "File uploaded successfully")
+
+(defn publish!
+  [mapping config excel]
+  "")
   
 (defn get-excel-config
   [path]

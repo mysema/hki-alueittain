@@ -17,6 +17,9 @@
   (mp/wrap-multipart-params
     (POST "/admin" [file] 
       (services/upload-file! file)))
+ 
+  (POST "/publish" [mapping config excel]
+    (services/publish! mapping config excel))
 
   (GET "/data/:id" [id]
     (-> (services/get-excel-data id)
