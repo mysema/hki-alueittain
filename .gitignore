@@ -3,7 +3,10 @@
 /lib
 /classes
 /checkouts
-pom.xml
+/data/*.yaml
+/data/*.xls
+/data/*.xlsx
+.xml
 pom.xml.asc
 *.jar
 *.class
