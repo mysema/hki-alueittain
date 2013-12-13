@@ -16,7 +16,7 @@
 
   (mp/wrap-multipart-params
     (POST "/admin" [file] 
-      (services/upload-file file)))
+      (services/upload-file! file)))
 
   (GET "/data/:id" [id]
     (-> (services/get-excel-data id)
