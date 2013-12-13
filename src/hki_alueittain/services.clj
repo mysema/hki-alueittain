@@ -5,7 +5,9 @@
              [dk.ative.docjure.spreadsheet :refer :all]
              [clj-yaml.core :as yaml]))
 
-(def data-path "data")
+(def ^:dynamic data-path "data")
+
+(def data (atom {}))
 
 (def areas
   (->> (slurp (jio/resource "helsinki-areas.csv") :encoding "UTF-8")
@@ -16,21 +18,11 @@
 (defn upload-file!
   [file]
   (jio/copy (:tempfile file) (jio/file (str data-path "/" (:filename file))))
-  "File uploaded successfully")
-
-(defn publish!
-  [mapping config excel]
   "")
-  
-(defn get-excel-config
-  [path]
-  (let [path (str data-path "/" path "-config.yaml")]
-    (-> (slurp path :encoding "UTF-8")
-        yaml/parse-string)))
 
-(defn get-ui-config
+(defn get-config
   [path]
-  (let [path (str data-path "/" path "-ui-config.yaml")]
+  (let [path (str data-path "/" path)]
     (-> (slurp path :encoding "UTF-8")
         yaml/parse-string)))
 
@@ -45,17 +37,23 @@
                                             (nth row (.indexOf headers (keyword column))))))}])]))
 
 (defn get-excel-data
-  [path]
-  (let [xlsx-path (str data-path "/" path ".xlsx")
-        [x & xs] (-> (load-workbook xlsx-path)
+  [mapping excel-path]
+  (let [[x & xs] (-> (load-workbook excel-path)
                      (.getSheetAt 0)
                      row-seq)
         headers (map read-cell x)
-        rows (map (partial map read-cell) xs)        
-        config (get-excel-config path)]
-    {:headers (map (set/map-invert (:columns config)) headers)
+        rows (map (partial map read-cell) xs)]
+    {:headers (map (set/map-invert (:columns mapping)) headers)
      :rows rows}))
   
+(defn publish!
+  [mapping-filename ui-config-filename excel-filename]
+  (let [mapping (get-config mapping-filename) 
+        ui-config (get-config ui-config-filename)
+        excel-data (get-excel-data mapping (str data-path "/" excel-filename))]
+    (reset! data excel-data))
+  "")
+
 (comment
   (->> (load-workbook "spreadsheet.xlsx")
        (select-sheet "Price List")

@@ -18,8 +18,8 @@
     (POST "/admin" [file] 
       (services/upload-file! file)))
  
-  (POST "/publish" [mapping config excel]
-    (services/publish! mapping config excel))
+  (POST "/publish" [mapping uiConfig excel]
+    (services/publish! mapping uiConfig excel))
 
   (GET "/data/:id" [id]
     (-> (services/get-excel-data id)

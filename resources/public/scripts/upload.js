@@ -24,7 +24,7 @@ $(document).ready(function() {
   };
 
   setupFileupload('mapping');
-  setupFileupload('config');
+  setupFileupload('ui-config');
   setupFileupload('excel');
 
   $('input[type="text"]').keydown(function (e) {
@@ -33,7 +33,7 @@ $(document).ready(function() {
 
   $('#publish').click(function(e) {
     var mappingFilename = $('#mapping-input').val(),
-      configFilename = $('#config-input').val(),
+      uiConfigFilename = $('#ui-config-input').val(),
       excelFilename = $('#excel-input').val();
       
     e.preventDefault();
@@ -41,7 +41,7 @@ $(document).ready(function() {
     $.post('/publish', 
            {
              mapping: mappingFilename,
-             config: configFilename,
+             uiConfig: uiConfigFilename,
              excel: excelFilename
            },
            function(data) {

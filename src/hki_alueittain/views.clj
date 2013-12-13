@@ -92,23 +92,20 @@
           :content [:form.files-form.form-horizontal
                     {:role "form" :method "post" :enctype "multipart/form-data"}
                     [:input#mapping-upload {:type "file" :name "file" :data-url "/admin"}]
-                    [:input#config-upload {:type "file" :name "file" :data-url "/admin"}]
+                    [:input#ui-config-upload {:type "file" :name "file" :data-url "/admin"}]
                     [:input#excel-upload {:type "file" :name "file" :data-url "/admin"}]
                     [:div.form-group
                      [:label.col-sm-2.control-label
-                      {:for "inputMapping"}
                       "Lataa tietomalli:"]
                      [:div.col-sm-2 [:input#mapping-input.form-control {:type "text"}]]
                      [:button#mapping.btn.btn-default "Selaa"]]
                     [:div.form-group
                      [:label.col-sm-2.control-label
-                      {:for "inputConfig"}
                       "Lataa konfigurointi:"]
-                     [:div.col-sm-2 [:input#config-input.form-control {:type "text"}]]
-                     [:button#config.btn.btn-default "Selaa"]]
+                     [:div.col-sm-2 [:input#ui-config-input.form-control {:type "text"}]]
+                     [:button#ui-config.btn.btn-default "Selaa"]]
                     [:div.form-group
                      [:label.col-sm-2.control-label
-                      {:for "inputExcel"}
                       "Lataa Exceltiedosto:"]
                      [:div.col-sm-2 [:input#excel-input.form-control {:type "text"}]]
                      [:button#excel.btn.btn-default "Selaa"]]
