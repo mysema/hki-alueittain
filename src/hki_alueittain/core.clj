@@ -1,6 +1,7 @@
 (ns hki-alueittain.core
   (:require [ring.util.response :refer (redirect)]
-            [compojure.core :refer [defroutes GET]]
+            [ring.middleware.multipart-params :as mp]
+            [compojure.core :refer [defroutes GET POST]]
             [compojure.route :as route]
             [compojure.handler :as handler]
             [hki-alueittain.services :as services]
@@ -12,6 +13,9 @@
   
   (GET "/admin" []
     (views/admin-page))
+
+  (mp/wrap-multipart-params
+    (POST "/admin" {params :params} (services/upload-file (:file params))))
 
   (GET "/data/:id" [id]
     (-> (services/get-excel-data id)

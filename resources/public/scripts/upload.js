@@ -11,8 +11,9 @@ $(document).ready(function() {
       add: function(e, data) {
         var file = data.files[0];
         textInput.attr('value', file.name);
-      },
-      done: function (e, data) {
+        data.process().done(function () {
+            data.submit();
+        });
       }
     });
 

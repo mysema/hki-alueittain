@@ -12,6 +12,11 @@
        split-lines
        (map #(split % #","))
        (into {})))
+
+(defn upload-file
+  [file]
+  (jio/copy (:tempfile file) (jio/file (str data-path "/" (:filename file))))
+  "File uploaded successfully")
   
 (defn get-excel-config
   [path]
