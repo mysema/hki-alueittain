@@ -22,10 +22,12 @@ $(document).ready(function() {
     });
   };
 
+  setupFileupload('mapping');
   setupFileupload('config');
   setupFileupload('excel');
 
   $('input[type="text"]').keydown(function (e) {
     e.preventDefault();
   });
+
 });

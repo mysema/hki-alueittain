@@ -91,8 +91,15 @@
           :active :admin  
           :content [:form.files-form.form-horizontal
                     {:role "form"}
+                    [:input#mapping-upload {:type "file" :name "file" :data-url "/admin"}]
                     [:input#config-upload {:type "file" :name "file" :data-url "/admin"}]
                     [:input#excel-upload {:type "file" :name "file" :data-url "/admin"}]
+                    [:div.form-group
+                     [:label.col-sm-2.control-label
+                      {:for "inputMapping"}
+                      "Lataa tietomalli:"]
+                     [:div.col-sm-2 [:input#mapping-input.form-control {:type "text"}]]
+                     [:button#mapping.btn.btn-default "Selaa"]]
                     [:div.form-group
                      [:label.col-sm-2.control-label
                       {:for "inputConfig"}
