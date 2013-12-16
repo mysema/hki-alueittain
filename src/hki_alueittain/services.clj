@@ -1,7 +1,7 @@
 (ns hki-alueittain.services
   (:require  [clojure.java.io :as jio]
              [clojure.set :as set]
-             [clojure.string :refer (split split-lines)]
+             [clojure.string :as str]
              [dk.ative.docjure.spreadsheet :refer :all]
              [clj-yaml.core :as yaml]))
 
@@ -9,10 +9,12 @@
 
 (def data (atom {}))
 
+(def statistics-config (atom {}))
+
 (def areas
   (->> (slurp (jio/resource "helsinki-areas.csv") :encoding "UTF-8")
-       split-lines
-       (map #(split % #","))
+       str/split-lines
+       (map #(str/split % #","))
        (into {})))
 
 (def basic-areas
@@ -33,6 +35,14 @@
     (-> (slurp path :encoding "UTF-8")
         yaml/parse-string)))
 
+(defn column-formatter
+  [column]
+  (if (.endsWith (name column) "rel")
+    (fn [data] 
+      (str (str/replace data #"\." ",") " %")) 
+    (fn [data]
+      (str/replace (str/replace data #"\..*$" "") #"(.+)(.{3})$" "$1 $2"))))
+
 (defn data-for-ui
   [row headers ui-config]
   (for [[label content] ui-config]
@@ -41,7 +51,8 @@
        [(name label) {:headers (map :label columns)
                       :rows (for [{:keys [label source-columns]} rows]
                               (cons label (for [column source-columns]
-                                            (nth row (.indexOf headers (keyword column))))))}])]))
+                                            (let [formatter (column-formatter column)]
+                                            (formatter (nth row (.indexOf headers (keyword column))))))))}])]))
 
 (defn get-excel-data
   [mapping excel-path]
@@ -58,7 +69,8 @@
   (let [mapping (get-config mapping-filename) 
         ui-config (get-config ui-config-filename)
         excel-data (get-excel-data mapping (str data-path "/" excel-filename))]
-    (reset! data excel-data))
+    (reset! data excel-data)
+    (reset! statistics-config ui-config))
   "")
 
 (comment

@@ -1,5 +1,16 @@
 $(document).ready(function() {
 
+  // --------------------------------------
+  // Area page
+  // --------------------------------------
+  
+  $('select#area').change(function(e) {
+    window.location = '/?area=' + $(this).val();
+  });
+
+  // --------------------------------------
+  // Config and Excel upload 
+  // --------------------------------------
   var setupFileupload = function(part) {
     var btn = $('#' + part),
       fileInput = $('#' + part + '-upload'),
@@ -49,5 +60,6 @@ $(document).ready(function() {
            });
 
   });
+
 
 });

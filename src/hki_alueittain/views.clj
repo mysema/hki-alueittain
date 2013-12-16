@@ -1,7 +1,7 @@
 (ns hki-alueittain.views
   (:require [hiccup.core :refer (html)]
             [hiccup.page :refer (include-js)]
-            [hki-alueittain.services :refer (basic-areas)]))
+            [hki-alueittain.services :as services]))
 
 (defn- tags
   [tag]
@@ -56,7 +56,7 @@
       (include-js "scripts/vendor/jquery.ui.widget.js")
       (include-js "scripts/vendor/jquery.iframe-transport.js")
       (include-js "scripts/vendor/jquery.fileupload.js")
-      (include-js "scripts/upload.js")
+      (include-js "scripts/app.js")
 
      [:body 
       (navbar (nav-with-active nav active))
@@ -81,31 +81,43 @@
           :content (as-table content)))
 
 (defn areas-page
-  [& area]
-  (layout :title "Alueet"
-          :active :areas
-          :content [:html
-                    [:body
-                     [:div.col-md-4
-                      [:form.form-horizontal
-                       {:method "post", :role "form", :action "/"}
-                       [:div.form-group
-                        [:label.col-md-3.control-label "Valitse alue:"]
-                        [:div.col-md-9
-                         [:select#area.form-control
-                          {:name "area"}
-                          [:option {:value 0} "Ei valittu"]
-                          (for [[code name] basic-areas]
-                            [:option {:value code} name])]]]]
-                      [:table.table
-                       [:thead
-                        [:tr
-                         [:th "Äidinkieli ja kansalaisuus"]
-                         [:th "Henkilöä"]
-                         [:th "%"]]]
-                       [:tbody
-                        [:tr [:td "Suomenkieliset"] [:td "9 758"] [:td "83,6 %"]]
-                        [:tr [:td "Ruotsinkieliset"] [:td "1 178"] [:td "10,1 %"]]]]]]]))
+  [area]
+  (if (not (empty? @services/data)) 
+    (let [statistics (when (> (Integer/valueOf area) 0)
+                       (services/data-for-ui 
+                         (first (filter (fn [row] (= (first row) (str area))) (:rows @services/data))) 
+                         (:headers @services/data) 
+                         @services/statistics-config))]
+      (layout :title "Alueet"
+              :active :areas
+              :content [:div.col-md-4
+                        [:form.form-horizontal
+                         {:role "form"}
+                         [:div.form-group
+                          [:label.col-md-3.control-label "Valitse alue:"]
+                          [:div.col-md-9
+                           [:select#area.form-control
+                            {:name "area"}
+                            [:option {:value 0} "Ei valittu"]
+                            (for [[code name] services/basic-areas]
+                              [:option (if (= area code) {:value code :selected "selected"} {:value code}) name])]]]]
+                        (for [[header group] statistics]
+                          [:div
+                           [:h3 header]
+                           (for [[table-title table-data] group]
+                             [:table.table
+                              [:thead
+                               [:tr
+                                [:th table-title]
+                                (for [header (:headers table-data)]
+                                  [:th header])]]
+                              [:tbody
+                               (for [row (:rows table-data)]
+                                 [:tr (map (partial vector :td) row)])]])])]))
+    (layout :title "Alueet"
+            :active :areas
+            :content "Tiedot ei julkaistu vielä.")))
+
 
 (defn admin-page
   []
