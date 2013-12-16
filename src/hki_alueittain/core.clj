@@ -21,10 +21,6 @@
   (POST "/publish" [mapping uiConfig excel]
     (services/publish! mapping uiConfig excel))
 
-  (GET "/data/:id" [id]
-    (-> (services/get-excel-data id)
-         views/excel-page))    
-  
   (route/resources "/")
   
   (route/not-found "Page not found"))

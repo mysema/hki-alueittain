@@ -75,11 +75,6 @@
                             row)])
                 rows)]])
 
-(defn excel-page
-  [content]
-  (layout :title "Excel example"
-          :content (as-table content)))
-
 (defn areas-page
   [area]
   (if (not (empty? @services/data)) 

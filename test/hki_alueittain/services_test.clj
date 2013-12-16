@@ -7,15 +7,15 @@
     (let [mapping (get-config "tblDataTiedot-config.yaml")
           ui-config (get-config "tblDataTiedot-ui-config.yaml")
           {:keys [headers rows]} (get-excel-data mapping (str data-path "/tblDataTiedot.xlsx"))
-          row (rest (first rows))]
+          row (first rows)]
     (data-for-ui row headers ui-config) 
     => [["Väestö ja perheet" 
          [["Äidinkieli ja kansalaisuus" 
            {:headers ["Henkilöä" "%"], 
-            :rows [["Suomenkieliset" 82.6 35537.0] 
-                   ["Ruotsinkieliset" 6.0 68323.0] 
-                   ["Muunkieliset" 11.5 47878.0]
-                   ["Ulkomaalaiset" 8.0 70127.0] 
-                   ["Ulkomaalaistaustaiset" 11.8 247087.0]]}]]]])))
+            :rows [["Suomenkieliset" "491 524" "82,6 %"] 
+                   ["Ruotsinkieliset" "35 537", "6,0 %"]
+                   ["Muunkieliset" "68 323", "11,5 %"]
+                   ["Ulkomaalaiset" "47 878", "8,0 %"] 
+                   ["Ulkomaalaistaustaiset" "70 127", "11,8 %"]]}]]]])))
 
        
