@@ -77,9 +77,3 @@
   (->> (load-workbook "spreadsheet.xlsx")
        (select-sheet "Price List")
        (select-columns {:A :name, :B :price})))
-
-(comment 
-  (data-for-ui 
-    (first (filter (fn [row] (= (first row) "101")) (:rows excel))) 
-    (:headers excel) 
-    ui-config))
