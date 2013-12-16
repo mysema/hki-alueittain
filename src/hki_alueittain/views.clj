@@ -1,6 +1,7 @@
 (ns hki-alueittain.views
   (:require [hiccup.core :refer (html)]
-            [hiccup.page :refer (include-js)]))
+            [hiccup.page :refer (include-js)]
+            [hki-alueittain.services :refer (basic-areas)]))
 
 (defn- tags
   [tag]
@@ -80,10 +81,31 @@
           :content (as-table content)))
 
 (defn areas-page
-  []
+  [& area]
   (layout :title "Alueet"
           :active :areas
-          :content "Insert wild statistics here"))
+          :content [:html
+                    [:body
+                     [:div.col-md-4
+                      [:form.form-horizontal
+                       {:method "post", :role "form", :action "/"}
+                       [:div.form-group
+                        [:label.col-md-3.control-label "Valitse alue:"]
+                        [:div.col-md-9
+                         [:select#area.form-control
+                          {:name "area"}
+                          [:option {:value 0} "Ei valittu"]
+                          (for [[code name] basic-areas]
+                            [:option {:value code} name])]]]]
+                      [:table.table
+                       [:thead
+                        [:tr
+                         [:th "Äidinkieli ja kansalaisuus"]
+                         [:th "Henkilöä"]
+                         [:th "%"]]]
+                       [:tbody
+                        [:tr [:td "Suomenkieliset"] [:td "9 758"] [:td "83,6 %"]]
+                        [:tr [:td "Ruotsinkieliset"] [:td "1 178"] [:td "10,1 %"]]]]]]]))
 
 (defn admin-page
   []

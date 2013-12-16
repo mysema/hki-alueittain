@@ -15,6 +15,13 @@
        (map #(split % #","))
        (into {})))
 
+(def basic-areas
+  (reduce (fn [acc [code name]] 
+            (if (> (Integer/valueOf code) 100) 
+              (assoc acc code name) 
+              acc)) 
+          {} areas))
+
 (defn upload-file!
   [file]
   (jio/copy (:tempfile file) (jio/file (str data-path "/" (:filename file))))
@@ -58,3 +65,9 @@
   (->> (load-workbook "spreadsheet.xlsx")
        (select-sheet "Price List")
        (select-columns {:A :name, :B :price})))
+
+(comment 
+  (data-for-ui 
+    (first (filter (fn [row] (= (first row) "101")) (:rows excel))) 
+    (:headers excel) 
+    ui-config))

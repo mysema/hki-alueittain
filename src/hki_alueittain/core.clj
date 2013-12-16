@@ -8,8 +8,8 @@
             [hki-alueittain.views :as views]))
 
 (defroutes routes
-  (GET "/" []
-    (views/areas-page))
+  (GET "/" [area]
+    (views/areas-page area))
   
   (GET "/admin" []
     (views/admin-page))
