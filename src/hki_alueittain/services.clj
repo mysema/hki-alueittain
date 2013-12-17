@@ -40,8 +40,15 @@
     (fn [data]
       (str/replace (str/replace data #"\..*$" "") #"(.+)(.{3})$" "$1 $2"))))
 
+(defn data-for-area
+  [area]
+  (first (filter (fn [row] (= (first row) (str area))) (:rows @model/data))))
+
 (defn data-for-ui
   [row headers ui-config]
+  (clojure.pprint/pprint row)
+  (clojure.pprint/pprint headers)
+  (clojure.pprint/pprint ui-config)
   (for [[label content] ui-config]
     [(name label) 
      (for [[label {:keys [columns rows]}] content]

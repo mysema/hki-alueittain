@@ -81,7 +81,7 @@
   (if (not (empty? @model/data)) 
     (let [statistics (when (> (Integer/valueOf area) 0)
                        (services/data-for-ui 
-                         (first (filter (fn [row] (= (first row) (str area))) (:rows @model/data))) 
+                         (services/data-for-area area)  
                          (:headers @model/data) 
                          @model/statistics-config))]
       (layout :title "Alueet"
