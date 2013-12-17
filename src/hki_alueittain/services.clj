@@ -28,6 +28,10 @@
   (jio/copy (:tempfile file) (jio/file (str data-path "/" (:filename file))))
   "")
 
+(defn data-published
+  []
+  (not (empty? @data)))
+
 (defn get-config
   [path]
   (let [path (str data-path "/" path)]
@@ -48,10 +52,12 @@
 
 (defn city-average-for-source-column
   [source-column]
-  (let [i (.indexOf (:headers @data) (keyword source-column))
-        avg (nth (first (:rows @data)) i)
-        formatter (column-formatter source-column)]
-    (formatter avg)))
+  (if (data-published)
+    (let [i (.indexOf (:headers @data) (keyword source-column))
+          avg (nth (first (:rows @data)) i)
+          formatter (column-formatter source-column)]
+      (formatter avg))
+    "?"))
 
 (defn with-city-averages
   [columns rows]
@@ -76,10 +82,6 @@
                                   area-row)))]
          [(name label) {:headers (map :label columns)
                         :rows formatted-rows}]))]))
-(defn data-published
-  []
-  (not (empty? @data)))
-
 (defn maybe-area-statistics
   [area]
   (when 
