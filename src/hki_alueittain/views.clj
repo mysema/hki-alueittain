@@ -1,6 +1,7 @@
 (ns hki-alueittain.views
   (:require [hiccup.core :refer (html)]
             [hiccup.page :refer (include-js)]
+            [hki-alueittain.model :as model]  
             [hki-alueittain.services :as services]))
 
 (defn- tags
@@ -77,12 +78,12 @@
 
 (defn areas-page
   [area]
-  (if (not (empty? @services/data)) 
+  (if (not (empty? @model/data)) 
     (let [statistics (when (> (Integer/valueOf area) 0)
                        (services/data-for-ui 
-                         (first (filter (fn [row] (= (first row) (str area))) (:rows @services/data))) 
-                         (:headers @services/data) 
-                         @services/statistics-config))]
+                         (first (filter (fn [row] (= (first row) (str area))) (:rows @model/data))) 
+                         (:headers @model/data) 
+                         @model/statistics-config))]
       (layout :title "Alueet"
               :active :areas
               :content [:div.col-md-4

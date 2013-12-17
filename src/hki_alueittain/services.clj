@@ -1,15 +1,12 @@
 (ns hki-alueittain.services
-  (:require  [clojure.java.io :as jio]
-             [clojure.set :as set]
-             [clojure.string :as str]
-             [dk.ative.docjure.spreadsheet :refer :all]
-             [clj-yaml.core :as yaml]))
+  (:require [clojure.java.io :as jio]
+            [clojure.set :as set]
+            [clojure.string :as str]
+            [dk.ative.docjure.spreadsheet :refer :all]
+            [clj-yaml.core :as yaml]
+            [hki-alueittain.model :as model]))
 
 (def ^:dynamic data-path "data")
-
-(def data (atom {}))
-
-(def statistics-config (atom {}))
 
 (def areas
   (->> (slurp (jio/resource "helsinki-areas.csv") :encoding "UTF-8")
@@ -69,8 +66,8 @@
   (let [mapping (get-config mapping-filename) 
         ui-config (get-config ui-config-filename)
         excel-data (get-excel-data mapping (str data-path "/" excel-filename))]
-    (reset! data excel-data)
-    (reset! statistics-config ui-config))
+    (reset! model/data excel-data)
+    (reset! model/statistics-config ui-config))
   "")
 
 (comment
