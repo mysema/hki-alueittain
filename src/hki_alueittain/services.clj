@@ -5,8 +5,9 @@
             [dk.ative.docjure.spreadsheet :refer :all]
             [clj-yaml.core :as yaml]))
 
-(def data (atom {})) 
-(def statistics-config (atom {}))
+(defonce data (atom {})) 
+
+(defonce statistics-config (atom {}))
 
 (def ^:dynamic data-path "data")
 
@@ -82,10 +83,10 @@
                                   area-row)))]
          [(name label) {:headers (map :label columns)
                         :rows formatted-rows}]))]))
+
 (defn maybe-area-statistics
   [area]
-  (when 
-    (> (Integer/valueOf area) 0)
+  (when (and (data-published) area (pos? (Integer/valueOf area)))
     (data-for-ui (data-for-area area) (:headers @data) @statistics-config)))
 
 (defn get-excel-data

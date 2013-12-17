@@ -76,39 +76,37 @@
                 rows)]])
 
 (defn areas-page
-  [area statistics]
-  (layout :title "Alueet"
-          :active :areas
-          :content [:div.col-md-6
-                    [:form.form-horizontal
-                     {:role "form"}
-                     [:div.form-group
-                      [:label.col-md-3.control-label "Valitse alue:"]
-                      [:div.col-md-9
-                       [:select#area.form-control
-                        {:name "area"}
-                        [:option {:value 0} "Ei valittu"]
-                        (for [[code name] services/basic-areas]
-                          [:option (if (= area code) {:value code :selected "selected"} {:value code}) name])]]]]
-                    (for [[header group] statistics]
-                      [:div
-                       [:h3 header]
-                       (for [[table-title table-data] group]
-                         [:table.table
-                          [:thead
-                           [:tr
-                            [:th table-title]
-                            (for [header (:headers table-data)]
-                              [:th header])]]
-                          [:tbody
-                           (for [row (:rows table-data)]
-                             [:tr (map (partial vector :td) row)])]])])]))
-
-(defn areas-page-no-statistics
-  []
-  (layout :title "Alueet"
-          :active :areas
-          :content "Tiedot ei julkaistu vielä.")) 
+  [data-published area statistics]
+  (if (not data-published)
+    (layout :title "Alueet"
+            :active :areas
+            :content "Tiedot ei julkaistu vielä.")  
+    (layout :title "Alueet"
+            :active :areas
+            :content [:div.col-md-6
+                      [:form.form-horizontal
+                       {:role "form"}
+                       [:div.form-group
+                        [:label.col-md-3.control-label "Valitse alue:"]
+                        [:div.col-md-9
+                         [:select#area.form-control
+                          {:name "area"}
+                          [:option {:value 0} "Ei valittu"]
+                          (for [[code name] services/basic-areas]
+                            [:option (if (= area code) {:value code :selected "selected"} {:value code}) name])]]]]
+                      (for [[header group] statistics]
+                        [:div
+                         [:h3 header]
+                         (for [[table-title table-data] group]
+                           [:table.table
+                            [:thead
+                             [:tr
+                              [:th table-title]
+                              (for [header (:headers table-data)]
+                                [:th header])]]
+                            [:tbody
+                             (for [row (:rows table-data)]
+                               [:tr (map (partial vector :td) row)])]])])])))
 
 (defn admin-page
   []
