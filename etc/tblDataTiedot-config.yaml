@@ -1,123 +1,19 @@
-columns:
-  district-id: Peruspiiri
-  finnish: Suomenkieliset
-  finnish-rel: Suomenkieliset %
-  swedish: Ruotsinkieliset
-  swedish-rel: Ruotsinkieliset %
-  other-lang: Muun kieliset
-  other-lang-rel: Muun kieliset %
-  foreigners: Ulkomaalaiset
-  foreigners-rel: Ulkomaalaiset %
-  foreign-background: Ulkomaalaistaustaiset
-  foreign-background-rel: Ulkomaalaistaustaiset %
-  native: H:gissä syntyneitä
-  native: H:gissä syntyneitä %
-  born: Syntyneet lkm
-  born-per-1000: Syntyneet /1000 as
-  died: Kuolleet lkm
-  died-per-1000: Kuolleet /1000 as
-  moved-to: Muutto alueelle lkm
-  moved-to-per-1000: Muutto alueelle /1000 as
-  moved-from: Muutto alueelta lkm
-  moved-from-per-1000: Muutto alueelta /1000 as
-  inhabitants-per-km2: Asukkaita/km2
-  jobs-per-km2: Työpaikkoja/km2
-  area-ha: Kerrosala/ha
-  inhabitants: Asukkaat yht
-  0-6y: 0-6v
-  0-6y-rel: 0-6v %
-  7-15y: 7-15v
-  7-15y-rel: 7-15v %
-  16-18y: 16-18v
-  16-18y-rel: 16-18v %
-  19-24y: 19-24v
-  19-24y-rel: 19-24v %
-  25-39y: 25-39v
-  25-39y-rel: 25-39v %
-  40-64y: 40-64v
-  40-64y-rel: 40-64v %
-  65+y: 65+ v
-  65+y-rel: 65+ v %
-  households: Asuntokuntien lkm
-  household-avg-size: Asuntokuntien keskikoko
-  households-1p: 1-hengen asuntokuntia
-  families: Perheiden lkm
-  families-w-children: Lapsiperheiden lkm
-  family-avg-size: Perheiden keskikoko
-  15+y: 15v täytt lkm
-  comprehensive-edu: Enint perusaste
-  comprehensive-edu-rel: Enint perusaste %
-  lower-secondary-edu: Alempikeskiaste
-  lower-secondary-edu-rel: Alempikeskiaste %
-  upper-secondary-edu: Ylempikeskiaste
-  upper-secondary-edu-rel: Ylempikeskiaste %
-  tertiary-edu: Korkea-aste
-  tertiary-edu-rel: Korkea-aste %
-  college-edu: Lukiota käyvät
-  college-edu-16-18y: Lukiota käyvät osuus 16-18v
-  vocational-edu: Ammattikoulua käyvät
-  vocational-edu-18-18y: Ammattikoulua käyvät osuus 16-18v
-  income-per-person: Tulot/asukas 1000 mk
-  income-per-workforce: Tulot/työvoima
-  income-per-family: Tulot/asuntokunta
-  apartment-avg-size-m2: Asuntojen keskikoko m2
-  livingspace-m2-per-person: Asumisväljyys m2/asukas
-  livingdensity-rooms-per-person: Asumistiheys huonetta/henki
-  apartments: Asuntoja yhteensä
-  small-houses: Pientaloasuntoja
-  rental-apartments: Vuokra-asuntoja
-  ara-rental-apartments: Aravavuokra-asuntoja
-  office-buildings-area-1000m2: Toimitilarakennukset yhteensä kerrosala 1000 m2
-  sales-buildings: Liikerakennukset
-  public-buildings: Julkiset rakennukset
-  industrial-buildings: Teollisuusrakennukset
-  other-buildings: Muut rakennukset
-  kindergartens: Päiväkoteja
-  children-in-kindergartens: Lapsia päiväkotihoidossa yht
-  0-6y-in-kindergarten: 0-6v kokopäivähoidossa/100 lasta
-  0-6y-in-kindergarden-fullday: 0-6v (kokopäivä)perhepäivähoidossa
-  0-6-in-familycare-fullday: 0-6v (kokopäivä)perhepäivähoidossa/100 lasta
-  daycare-support-families: Kotihoidon tukea saavia perheitä
-  finnish-lower-edu-schools: Suomenkielinen ala-aste koulut
-  finnish-lower-edu-students: Suomenkielinen ala-asteoppilaat
-  finnish-upper-edu-schools: Suomenkielinen yläaste koulut
-  finnish-upper-edu-students: Suomenkielinen yläasteoppilaat
-  swedish-lower-edu-schools: Ruotsinkielinen ala-aste koulut
-  swedish-lower-edu-students: Ruotsinkielinen ala-aste oppilaat
-  swedish-upper-edu-schools: Ruotsinkielinen yläaste koulut
-  swedish-upper-edu-students: Ruotsinkielinen yläaste oppilaat
-  college-schools: Lukio koulut
-  college-students: Lukio oppilaat
-  special-schools: Erikoiskoulut
-  special-students: Erikoiskoulut oppilaat
-  healthcare-visits: Käyntejä avosairaanhoidossa
-  healthcare-visits-per-person: Käyntejä avosairaanhoidossa/asukas
-  health-home-visits: Sairaanhoidon kotikäyntejä
-  health-home-visits-per-person: Sairaanhoidon kotikäyntejä/asukas
-  child-health-centre-visits: Lastenneuvolan käyntejä
-  child-health-centre-visits-0-6y: Lastenneuvolan käyntejä/0-6v
-  persons-w-income: Toimeentulon saajia
-  persons-w-income-per-1000-persons: Toimeentulon saajia/1000 asukasta
-  child-protection-customers: Lastensuojelun asiakkaita
-  child-protection-customers-per-1000-0-17y: Lastensuojelun asiakkaita/1000 0-17v
-  libraries: Kirjasto
-  health-centres: Terveysasema
-  playgrounds: Leikkipuisto
-  swimming-halls: Uimahalli
-  churches: Kirkko
-  postal-offices: Posti
-  kela-offices: KELA:n toimisto
-  pharmacies: Apteekki
-  alkos: Alko
-  grocery-stores: Päivittäistavarakaupat
-  other-stores: Muut vähittäiskaupat
-  restaurants-and-cafes: Ravintolat ja kahvilat
-  parks-area: Puistoa, ha
-  forest-area: Metsää, ha
-  beaches: Uimaranta, kpl
-  walking-accidents-avg-per-year: Jalankulkuonnettomuuksia keskim/vuosi
-  unemployment: Työttömyysaste
-  longterm-unemployment: Pitäaikaistyöttömyys
-  young-people-unemployment: Nuorisotyöttömyys
-  employment: Työllisyysaste
-  person-accidents: Henkilövahinko-onnettomuudet
+Väestö ja perheet:
+  Äidinkieli ja kansalaisuus:
+    columns:
+      - name: persons
+        label: Henkilöä
+      - name: percentage
+        label: "%"
+    rows:
+      - label: Suomenkieliset
+        source-columns: [finnish, finnish-rel]
+      - label: Ruotsinkieliset
+        source-columns: [swedish, swedish-rel]
+      - label: Muunkieliset
+        source-columns: [other-lang, other-lang-rel]
+      - label: Ulkomaalaiset
+        source-columns: [foreigners, foreigners-rel]
+      - label: Ulkomaalaistaustaiset
+        source-columns: [foreign-background, foreign-background-rel]
+    show-city-average: true
