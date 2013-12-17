@@ -4,8 +4,8 @@
 
 (facts "data for ui"
   (binding [data-path "etc"]
-    (let [mapping (get-config "tblDataTiedot-config.yaml")
-          ui-config (get-config "tblDataTiedot-ui-config.yaml")
+    (let [mapping (get-config "tblDataTiedot-model.yaml")
+          ui-config (get-config "tblDataTiedot-config.yaml")
           {:keys [headers rows]} (get-excel-data mapping (str data-path "/tblDataTiedot.xlsx"))
           row (first rows)]
     (data-for-ui row headers ui-config) 
