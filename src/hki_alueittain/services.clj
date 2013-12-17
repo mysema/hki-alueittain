@@ -3,8 +3,10 @@
             [clojure.set :as set]
             [clojure.string :as str]
             [dk.ative.docjure.spreadsheet :refer :all]
-            [clj-yaml.core :as yaml]
-            [hki-alueittain.model :as model]))
+            [clj-yaml.core :as yaml]))
+
+(def data (atom {})) 
+(def statistics-config (atom {}))
 
 (def ^:dynamic data-path "data")
 
@@ -42,21 +44,47 @@
 
 (defn data-for-area
   [area]
-  (first (filter (fn [row] (= (first row) (str area))) (:rows @model/data))))
+  (first (filter (fn [row] (= (first row) (str area))) (:rows @data))))
+
+(defn city-average-for-source-column
+  [source-column]
+  (let [i (.indexOf (:headers @data) (keyword source-column))
+        avg (nth (first (:rows @data)) i)
+        formatter (column-formatter source-column)]
+    (formatter avg)))
+
+(defn with-city-averages
+  [columns rows]
+  [(concat columns [{:label "Helsingin keskiarvo" :name "city-average"}])
+   (map (fn [row] (assoc row :city-average (city-average-for-source-column (last (:source-columns row))))) rows)])
 
 (defn data-for-ui
   [row headers ui-config]
-  (clojure.pprint/pprint row)
-  (clojure.pprint/pprint headers)
-  (clojure.pprint/pprint ui-config)
   (for [[label content] ui-config]
     [(name label) 
-     (for [[label {:keys [columns rows]}] content]
-       [(name label) {:headers (map :label columns)
-                      :rows (for [{:keys [label source-columns]} rows]
-                              (cons label (for [column source-columns]
-                                            (let [formatter (column-formatter column)]
-                                            (formatter (nth row (.indexOf headers (keyword column))))))))}])]))
+     (for [[label {:keys [columns rows show-city-average]}] content]
+       (let [[columns rows] (if 
+                              show-city-average 
+                              (with-city-averages columns rows) 
+                              [columns rows])
+             formatted-rows (for [{:keys [label source-columns city-average]} rows]
+                              (let [area-row (cons label (for [column source-columns]
+                                                           (let [formatter (column-formatter column)]
+                                                             (formatter (nth row (.indexOf headers (keyword column)))))))]
+                                (if city-average
+                                  (concat area-row [city-average])
+                                  area-row)))]
+         [(name label) {:headers (map :label columns)
+                        :rows formatted-rows}]))]))
+(defn data-published
+  []
+  (not (empty? @data)))
+
+(defn maybe-area-statistics
+  [area]
+  (when 
+    (> (Integer/valueOf area) 0)
+    (data-for-ui (data-for-area area) (:headers @data) @statistics-config)))
 
 (defn get-excel-data
   [mapping excel-path]
@@ -73,8 +101,8 @@
   (let [mapping (get-config mapping-filename) 
         ui-config (get-config ui-config-filename)
         excel-data (get-excel-data mapping (str data-path "/" excel-filename))]
-    (reset! model/data excel-data)
-    (reset! model/statistics-config ui-config))
+    (reset! data excel-data)
+    (reset! statistics-config ui-config))
   "")
 
 (comment

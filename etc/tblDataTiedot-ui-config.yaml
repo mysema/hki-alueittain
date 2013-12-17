@@ -16,5 +16,4 @@ Väestö ja perheet:
         source-columns: [foreigners, foreigners-rel]
       - label: Ulkomaalaistaustaiset
         source-columns: [foreign-background, foreign-background-rel]
-    show_city_average: true
-    city_average_column: percentage
+    show-city-average: true

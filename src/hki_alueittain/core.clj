@@ -9,8 +9,12 @@
 
 (defroutes routes
   (GET "/" [area]
-    (views/areas-page (if area area "0")))
-  
+   (if (services/data-published) 
+      (let [area (or area "0")
+            statistics (services/maybe-area-statistics area)]
+        (views/areas-page area statistics))
+      (views/areas-page-no-statistics)))
+
   (GET "/admin" []
     (views/admin-page))
 

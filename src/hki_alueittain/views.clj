@@ -1,7 +1,6 @@
 (ns hki-alueittain.views
   (:require [hiccup.core :refer (html)]
             [hiccup.page :refer (include-js)]
-            [hki-alueittain.model :as model]  
             [hki-alueittain.services :as services]))
 
 (defn- tags
@@ -77,43 +76,39 @@
                 rows)]])
 
 (defn areas-page
-  [area]
-  (if (not (empty? @model/data)) 
-    (let [statistics (when (> (Integer/valueOf area) 0)
-                       (services/data-for-ui 
-                         (services/data-for-area area)  
-                         (:headers @model/data) 
-                         @model/statistics-config))]
-      (layout :title "Alueet"
-              :active :areas
-              :content [:div.col-md-4
-                        [:form.form-horizontal
-                         {:role "form"}
-                         [:div.form-group
-                          [:label.col-md-3.control-label "Valitse alue:"]
-                          [:div.col-md-9
-                           [:select#area.form-control
-                            {:name "area"}
-                            [:option {:value 0} "Ei valittu"]
-                            (for [[code name] services/basic-areas]
-                              [:option (if (= area code) {:value code :selected "selected"} {:value code}) name])]]]]
-                        (for [[header group] statistics]
-                          [:div
-                           [:h3 header]
-                           (for [[table-title table-data] group]
-                             [:table.table
-                              [:thead
-                               [:tr
-                                [:th table-title]
-                                (for [header (:headers table-data)]
-                                  [:th header])]]
-                              [:tbody
-                               (for [row (:rows table-data)]
-                                 [:tr (map (partial vector :td) row)])]])])]))
-    (layout :title "Alueet"
-            :active :areas
-            :content "Tiedot ei julkaistu vielä.")))
+  [area statistics]
+  (layout :title "Alueet"
+          :active :areas
+          :content [:div.col-md-6
+                    [:form.form-horizontal
+                     {:role "form"}
+                     [:div.form-group
+                      [:label.col-md-3.control-label "Valitse alue:"]
+                      [:div.col-md-9
+                       [:select#area.form-control
+                        {:name "area"}
+                        [:option {:value 0} "Ei valittu"]
+                        (for [[code name] services/basic-areas]
+                          [:option (if (= area code) {:value code :selected "selected"} {:value code}) name])]]]]
+                    (for [[header group] statistics]
+                      [:div
+                       [:h3 header]
+                       (for [[table-title table-data] group]
+                         [:table.table
+                          [:thead
+                           [:tr
+                            [:th table-title]
+                            (for [header (:headers table-data)]
+                              [:th header])]]
+                          [:tbody
+                           (for [row (:rows table-data)]
+                             [:tr (map (partial vector :td) row)])]])])]))
 
+(defn areas-page-no-statistics
+  []
+  (layout :title "Alueet"
+          :active :areas
+          :content "Tiedot ei julkaistu vielä.")) 
 
 (defn admin-page
   []
