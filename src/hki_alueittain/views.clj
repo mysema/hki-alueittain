@@ -80,7 +80,7 @@
   (if (not data-published)
     (layout :title "Alueet"
             :active :areas
-            :content "Tiedot ei julkaistu vielä.")  
+            :content "Ei tietoja vielä.")  
     (layout :title "Alueet"
             :active :areas
             :content [:div.col-md-6
