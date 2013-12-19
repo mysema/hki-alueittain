@@ -18,9 +18,7 @@
   (array-map :areas
              {:name "Alueet" :href "/"}
              :admin
-             {:name "Ylläpito" :href "/admin"}
-             :map 
-             {:name "Karttavertailu" :href "/map.html"}))
+             {:name "Ylläpito" :href "/admin"}))
 
 (defn nav-with-active
   [nav active]
