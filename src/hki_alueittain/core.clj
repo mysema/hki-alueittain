@@ -20,7 +20,8 @@
       ""))
  
   (POST "/publish" [mapping uiConfig excel]
-    (services/publish! mapping uiConfig excel))
+    (services/publish! mapping uiConfig excel)
+    "")
 
   (route/resources "/")
   

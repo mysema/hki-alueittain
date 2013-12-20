@@ -103,8 +103,7 @@
         ui-config (get-config ui-config-filename)
         excel-data (get-excel-data mapping (str data-path "/" excel-filename))]
     (reset! data excel-data)
-    (reset! statistics-config ui-config))
-  "")
+    (reset! statistics-config ui-config)))
 
 (defn data-published?
   []
