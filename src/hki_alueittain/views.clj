@@ -44,7 +44,7 @@
   (html 
     [:html
      [:head
-      [:title title]]
+      [:title title]
       (meta-tags {:charset "utf-8"}
                  {:http-equiv "x-ua-compatible" :content "ie=edge,chrome=1"}
                  {:name "description" :content ""}
@@ -54,28 +54,16 @@
       (include-js "scripts/vendor/jquery.ui.widget.js")
       (include-js "scripts/vendor/jquery.iframe-transport.js")
       (include-js "scripts/vendor/jquery.fileupload.js")
-      (include-js "scripts/app.js")
-
+      (include-js "scripts/app.js")]
      [:body 
       (navbar (nav-with-active nav active))
       [:section 
        {:role "main"}
        content]]]))
 
-(defn- as-table
-  [{:keys [headers rows]}]
-  [:table 
-   [:thead 
-    [:tr (map (fn [header] [:th header])
-              headers)]]
-   [:tbody (map (fn [row]
-                  [:tr (map (fn [cell] [:td cell])
-                            row)])
-                rows)]])
-
 (defn areas-page
-  [data-published area statistics]
-  (if (not data-published)
+  [data-published? area statistics]
+  (if (not data-published?)
     (layout :title "Alueet"
             :active :areas
             :content "Ei tietoja vielä.")  
