@@ -1,3 +1,7 @@
+# This file configures the statistics (grouping, row order, whether or
+# not to show city averages and so on). It should be uploaded in the 
+# "Lataa konfigurointi" field.
+
 Väestö ja perheet:
   Äidinkieli ja kansalaisuus:
     columns:

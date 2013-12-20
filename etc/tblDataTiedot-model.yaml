@@ -1,3 +1,6 @@
+# This file maps the Excel column headers to the web application's internal
+# data model. It should be uploaded in the "Lataa tietomalli" field.
+
 columns:
   district-id: Peruspiiri
   finnish: Suomenkieliset
