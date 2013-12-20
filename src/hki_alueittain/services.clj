@@ -28,17 +28,13 @@
   [file]
   (jio/copy (:tempfile file) (jio/file (str data-path "/" (:filename file)))))
 
-(defn data-published?
-  []
-  (not (empty? @data)))
-
-(defn get-config
+(defn- get-config
   [path]
   (let [path (str data-path "/" path)]
     (-> (slurp path :encoding "UTF-8")
         yaml/parse-string)))
 
-(defn column-formatter
+(defn- column-formatter
   [column]
   (if (.endsWith (name column) "rel")
     (fn [data] 
@@ -46,11 +42,11 @@
     (fn [data]
       (str/replace (str/replace data #"\..*$" "") #"(.+)(.{3})$" "$1 $2"))))
 
-(defn data-for-area
+(defn- data-for-area
   [area]
   (first (filter (fn [row] (= (first row) (str area))) (:rows @data))))
 
-(defn city-average-for-source-column
+(defn- city-average-for-source-column
   [source-column]
   (if (data-published?)
     (let [i (.indexOf (:headers @data) (keyword source-column))
@@ -59,7 +55,7 @@
       (formatter avg))
     "?"))
 
-(defn with-city-averages
+(defn- with-city-averages
   [columns rows]
   [(concat columns [{:label "Helsingin keskiarvo" :name "city-average"}])
    (map (fn [row] (assoc row :city-average (city-average-for-source-column (last (:source-columns row))))) rows)])
@@ -69,8 +65,7 @@
   (for [[label content] ui-config]
     [(name label) 
      (for [[label {:keys [columns rows show-city-average]}] content]
-       (let [[columns rows] (if 
-                              show-city-average 
+       (let [[columns rows] (if show-city-average 
                               (with-city-averages columns rows) 
                               [columns rows])
              formatted-rows (for [{:keys [label source-columns city-average]} rows]
@@ -88,7 +83,7 @@
   (when (and (data-published?) area (pos? (Integer/valueOf area)))
     (data-for-ui (data-for-area area) (:headers @data) @statistics-config)))
 
-(defn get-excel-data
+(defn- get-excel-data
   [mapping excel-path]
   (let [[x & xs] (-> (load-workbook excel-path)
                      (.getSheetAt 0)
@@ -106,6 +101,10 @@
     (reset! data excel-data)
     (reset! statistics-config ui-config))
   "")
+
+(defn data-published?
+  []
+  (not (empty? @data)))
 
 (comment
   (->> (load-workbook "spreadsheet.xlsx")

@@ -20,13 +20,13 @@
              :admin
              {:name "Ylläpito" :href "/admin"}))
 
-(defn nav-with-active
+(defn- nav-with-active
   [nav active]
   (if (nil? active)
     nav
     (assoc-in nav [active :active] true)))
 
-(defn navbar
+(defn- navbar
   [links]
   [:nav.navbar.navbar-default.navbar-fixed-top
    {:role "navigation"}
@@ -39,7 +39,7 @@
         (when (:active link) {:class "active"}) 
         [:a {:href (:href link)} (:name link)]])]]])
 
-(defn layout
+(defn- layout
   [& {:keys [title active content]}]
   (html 
     [:html
