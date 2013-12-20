@@ -11,6 +11,10 @@
 
 (def ^:dynamic data-path "data")
 
+(defn data-published?
+  []
+  (not (empty? @data)))
+
 (def areas
   (->> (slurp (jio/resource "helsinki-areas.csv") :encoding "UTF-8")
        str/split-lines
@@ -28,7 +32,7 @@
   [file]
   (jio/copy (:tempfile file) (jio/file (str data-path "/" (:filename file)))))
 
-(defn- get-config
+(defn get-config
   [path]
   (let [path (str data-path "/" path)]
     (-> (slurp path :encoding "UTF-8")
@@ -83,7 +87,7 @@
   (when (and (data-published?) area (pos? (Integer/valueOf area)))
     (data-for-ui (data-for-area area) (:headers @data) @statistics-config)))
 
-(defn- get-excel-data
+(defn get-excel-data
   [mapping excel-path]
   (let [[x & xs] (-> (load-workbook excel-path)
                      (.getSheetAt 0)
