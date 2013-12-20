@@ -9,14 +9,15 @@
 
 (defroutes routes
   (GET "/" [area]
-   (views/areas-page (services/data-published) area (services/maybe-area-statistics area)))
+   (views/areas-page (services/data-published?) area (services/maybe-area-statistics area)))
 
   (GET "/admin" []
     (views/admin-page))
 
   (mp/wrap-multipart-params
     (POST "/admin" [file] 
-      (services/upload-file! file)))
+      (services/upload-file! file)
+      ""))
  
   (POST "/publish" [mapping uiConfig excel]
     (services/publish! mapping uiConfig excel))

@@ -26,10 +26,9 @@
 
 (defn upload-file!
   [file]
-  (jio/copy (:tempfile file) (jio/file (str data-path "/" (:filename file))))
-  "")
+  (jio/copy (:tempfile file) (jio/file (str data-path "/" (:filename file)))))
 
-(defn data-published
+(defn data-published?
   []
   (not (empty? @data)))
 
@@ -53,7 +52,7 @@
 
 (defn city-average-for-source-column
   [source-column]
-  (if (data-published)
+  (if (data-published?)
     (let [i (.indexOf (:headers @data) (keyword source-column))
           avg (nth (first (:rows @data)) i)
           formatter (column-formatter source-column)]
@@ -86,7 +85,7 @@
 
 (defn maybe-area-statistics
   [area]
-  (when (and (data-published) area (pos? (Integer/valueOf area)))
+  (when (and (data-published?) area (pos? (Integer/valueOf area)))
     (data-for-ui (data-for-area area) (:headers @data) @statistics-config)))
 
 (defn get-excel-data
